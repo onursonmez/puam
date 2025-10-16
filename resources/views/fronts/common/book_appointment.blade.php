@@ -58,7 +58,7 @@
                     {{ Form::select('service_id', isset(session()->get('data')['service']) ? session()->get('data')['service'] : [] , isset(session()->get('data')['service_id']) ? session()->get('data')['service_id'] : '',['class' => 'form-select', 'data-control'=>"select2", 'id'=> 'FrontAppointmentServiceId','placeholder' => __('messages.common.select_service') ]) }}
                 </div>
             </div>
-            <div class="col-md-6 mb-5">
+            <div class="col-md-6">
                 {{ Form::label('contact', __('messages.patient.contact_no').':', ['class' => 'form-label']) }}
                 {{ Form::tel( 'contact',null,['class' => 'form-control',
                 'placeholder' => __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
@@ -87,6 +87,15 @@
             <label class="form-label" for="Payment Type">{{ __('messages.appointment.payment_method')}}: <span
                     class="required"></span></label>
             {{ Form::select('payment_type', getAllPaymentStatus(), null,['class' => 'form-select', 'id'=>'paymentMethod', 'data-control'=>"select2",'placeholder' => __('messages.appointment.Select_payment_method') ]) }}
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="form-label" for="template-medical-description">{{ __('messages.appointment.appointment_description_label') }}:<span
+                    class="required"></span></label>
+            <textarea id="template-medical-description" name="description" rows="5" style="min-height: 200px;"
+                    class="form-control">{{ isset(session()->get('data')['description']) ? session()->get('data')['description'] : '' }}</textarea>
         </div>
     </div>
     @php
@@ -130,6 +139,22 @@
                 <p class="text-uppercase mb-sm-4 mb-0 d-none"
                    id="payableAmountText">{{__('messages.appointment.payable_amount')}} : <span class="fw-bold" id="payableAmount">{{__('messages.common.n/a')}}</span>
                 </p>
+            </div>
+
+            <div class="col-12">
+                <input type="checkbox" class="form-check-input" name="toc" value="1" required/>
+                <span class="text-gray-700 me-2 ml-1">{{__('messages.web.i_agree')}}
+                            <a target="_blank" href="{{ route('terms.conditions') }}"
+                                class="ms-1 link-primary">{{__('messages.web.terms_and_conditions')}}</a>
+                </span>
+            </div>
+
+            <div class="col-12">
+                <input type="checkbox" class="form-check-input" name="toc" value="1" required/>
+                <span class="text-gray-700 me-2 ml-1">{{__('messages.web.i_agree')}}
+                            <a target="_blank" href="{{ route('privacy.policy') }}"
+                                class="ms-1 link-primary">{{__('messages.privacy_policy')}}</a>
+                </span>
             </div>
 
             <div class="col-12 text-center">

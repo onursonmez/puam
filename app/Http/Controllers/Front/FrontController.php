@@ -156,4 +156,27 @@ class FrontController extends AppBaseController
 
         return $this->sendSuccess(__('messages.flash.language_change'));
     }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function appointmentSuccess(Request $request): \Illuminate\View\View
+    {
+        $appointmentId = $request->get('appointment_id');
+        
+        if (!$appointmentId) {
+            return redirect()->route('medical');
+        }
+
+        // Get appointment details
+        $appointment = \App\Models\Appointment::with(['patient.user', 'doctor.user', 'services'])
+            ->where('id', $appointmentId)
+            ->first();
+
+        if (!$appointment) {
+            return redirect()->route('medical');
+        }
+
+        return view('fronts.appointment_success', compact('appointment'));
+    }
 }

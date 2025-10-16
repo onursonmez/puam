@@ -129,10 +129,17 @@
                                 </span>
                             </div>
                         @endif
-                        <div class="col-md-6 d-flex flex-column">
+                        <div class="col-md-6 d-flex flex-column mb-5">
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.doctor.created_at') }}:</label>
                             <span class="fs-4 text-gray-800">
                                 {{$appointment['data']->created_at->diffForHumans()}}
+                            </span>
+                        </div>
+
+                        <div class="col-md-12 d-flex flex-column">
+                            <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.description') }}:</label>
+                            <span class="fs-4 text-gray-800">
+                                {{$appointment['data']->description}}
                             </span>
                         </div>
                     </div>

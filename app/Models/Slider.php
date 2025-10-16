@@ -90,6 +90,6 @@ class Slider extends Model implements HasMedia
             return $media->getFullUrl();
         }
 
-        return asset('assets/front/images/home/home-page-image.png');
+        return asset('assets/front/images/home/puam-3.jpeg');
     }
 }

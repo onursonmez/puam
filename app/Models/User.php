@@ -652,4 +652,14 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(GoogleCalendarIntegration::class, 'user_id');
     }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmailNotification());
+    }
 }

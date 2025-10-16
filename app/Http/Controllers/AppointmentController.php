@@ -705,7 +705,8 @@ class AppointmentController extends AppBaseController
         Transaction::create($transaction);
 
         if (parse_url(url()->previous(), PHP_URL_PATH) == '/medical-appointment') {
-            return redirect(route('medicalAppointment'));
+            //return redirect(route('medicalAppointment'));
+            return redirect(route('appointments.success', ['appointment_id' => $appointment->id]));
         }
 
         if (! getLogInUser()) {
@@ -721,7 +722,7 @@ class AppointmentController extends AppBaseController
             return redirect(route('doctors.appointments'));
         }
 
-        return redirect(route('appointments.index'));
+        return redirect(route('appointments.success', ['appointment_id' => $appointment->id]));
     }
 
     public function appointmentPdf($id)

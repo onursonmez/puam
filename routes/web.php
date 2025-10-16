@@ -89,6 +89,7 @@ Route::middleware('setLanguage')->group(function () {
     Route::get('/terms-conditions', [FrontController::class, 'termsCondition'])->name('terms.conditions');
     Route::get('/privacy-policy', [FrontController::class, 'privacyPolicy'])->name('privacy.policy');
     Route::get('/faqs', [FrontController::class, 'faq'])->name('front.faqs');
+    Route::get('/appointment-success', [FrontController::class, 'appointmentSuccess'])->name('appointments.success');
     Route::get('qr-code/p/{id?}', [PatientQrCodeController::class,'show'])->name('patient_show');
 });
 //Change language
