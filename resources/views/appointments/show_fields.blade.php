@@ -30,7 +30,14 @@
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.appointment_at') }}:</label>
                             <span class="fs-4 text-gray-800">
                                 <span class="badge bg-info">
-                                    {{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY')}} {{$appointment['data']->from_time}} {{$appointment['data']->from_time_type}} - {{$appointment['data']->to_time}} {{$appointment['data']->to_time_type}}
+                                    @php
+    $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment['data']->from_time . ' ' . $appointment['data']->from_time_type);
+    $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment['data']->to_time . ' ' . $appointment['data']->to_time_type);
+@endphp
+
+{{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY') }}
+{{ $from->format('H:i') }} - {{ $to->format('H:i') }}
+
                                 </span>
                             </span>
                         </div>
