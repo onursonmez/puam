@@ -58,10 +58,16 @@
                                     <label class="fw-bold text-dark">{{ __('messages.appointment.date') }}:</label>
                                     <p class="mb-0">{{ \Carbon\Carbon::parse($appointment->date)->format('d.m.Y') }}</p>
                                 </div>
+                                @php
+                                    $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment->from_time . ' ' . $appointment->from_time_type);
+                                    $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment->to_time . ' ' . $appointment->to_time_type);
+                                @endphp
+
                                 <div class="col-md-6 mb-3">
                                     <label class="fw-bold text-dark">{{ __('messages.appointment.time') }}:</label>
-                                    <p class="mb-0">{{ $appointment->from_time }}{{ $appointment->from_time_type }} - {{ $appointment->to_time }}{{ $appointment->to_time_type }}</p>
+                                    <p class="mb-0">{{ $from->format('H:i') }} - {{ $to->format('H:i') }}</p>
                                 </div>
+
                             </div>
 
                             <div class="row">
