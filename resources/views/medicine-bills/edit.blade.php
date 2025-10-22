@@ -45,7 +45,7 @@
     {{Form::hidden('billUrl',route('bills.index'),['id'=>'editBillUrl','class'=>'billUrl'])}}
     {{Form::hidden('associateMedicines',json_encode($associateMedicines),['id'=>'editBillAssociateMedicines','class'=>'associateMedicines'])}}
     {{Form::hidden('uniqueId',$bill->billItems->count() + 1,['id'=>'editBillUniqueId','class'=>'uniqueId'])}}
-    {{Form::hidden('billDate',$bill->bill_date->format('Y-m-d h:i A'),['id'=>'editBillDate','class'=>'billDate'])}}
+    {{Form::hidden('billDate',$bill->bill_date->format('Y-m-d H:i'),['id'=>'editBillDate','class'=>'billDate'])}}
     {{Form::hidden('patientAdmissionDetailUrl',url('patient-admission-details'),['id'=>'editBillPatientAdmissionDetailUrl','class'=>'patientAdmissionDetailUrl'])}}
     {{Form::hidden('patientAdmissionId',$bill->patient_admission_id,['id'=>'editBillPatientAdmissionId','class'=>'patientAdmissionId'])}}
     {{Form::hidden('billId',$bill->id,['id'=>'editBillId','class'=>'billId'])}}

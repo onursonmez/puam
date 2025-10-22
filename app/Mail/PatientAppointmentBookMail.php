@@ -31,13 +31,14 @@ class PatientAppointmentBookMail extends Mailable
     {
         $name = $this->data['patient_name'];
         $patientId = $this->data['patient_id'];
+        $appointmentUniqueIdUnencrypted = $this->data['appointment_unique_id'];
         $appointmentUniqueId = Crypt::encryptString($this->data['appointment_unique_id']);
         $time = $this->data['original_from_time'].' - '.$this->data['original_to_time'];
-        $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
-        $subject = 'Appointment Booked Successfully';
+        $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('d.m.Y');
+        $subject = 'Randevunuz Başarıyla Alındı';
 
         return $this->view('emails.patient_appointment_booked_mail',
-            compact('name', 'time', 'date', 'appointmentUniqueId', 'patientId'))
+            compact('name', 'time', 'date', 'appointmentUniqueId', 'patientId', 'appointmentUniqueIdUnencrypted'))
             ->markdown('emails.patient_appointment_booked_mail')
             ->subject($subject);
     }

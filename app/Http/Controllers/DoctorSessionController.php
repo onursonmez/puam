@@ -201,18 +201,18 @@ class DoctorSessionController extends AppBaseController
             foreach ($slots as $key => $slot) {
                 $key--;
                 if ($key != 0) {
-                    $slotStartTime = date('h:i A',
+                    $slotStartTime = date('H:i',
                         strtotime('+'.$gap * $key.' minutes', strtotime($slot[0])));
-                    $slotEndTime = date('h:i A',
+                    $slotEndTime = date('H:i',
                         strtotime('+'.$gap * $key.' minutes', strtotime($slot[1])));
                     if (strtotime($doctorWeekDaySession->full_end_time) < strtotime($slotEndTime)) {
                         break;
                     }
                     if (strtotime($slotStartTime) < strtotime($slotEndTime)) {
-                        if (($isSameWeekDay && strtotime($slotStartTime) > strtotime(date('h:i A'))) || ! $isSameWeekDay) {
-                            $startTimeOrg = Carbon::parse(date('h:i A', strtotime($slotStartTime)));
-                            $slotStartTimeCarbon = Carbon::parse(date('h:i A', strtotime($startTime)));
-                            $slotEndTimeCarbon = Carbon::parse(date('h:i A', strtotime($endTime)));
+                        if (($isSameWeekDay && strtotime($slotStartTime) > strtotime(date('H:i'))) || ! $isSameWeekDay) {
+                            $startTimeOrg = Carbon::parse(date('H:i', strtotime($slotStartTime)));
+                            $slotStartTimeCarbon = Carbon::parse(date('H:i', strtotime($startTime)));
+                            $slotEndTimeCarbon = Carbon::parse(date('H:i', strtotime($endTime)));
                             if (! $startTimeOrg->between($slotStartTimeCarbon, $slotEndTimeCarbon)) {
                                 break;
                             }
@@ -224,12 +224,12 @@ class DoctorSessionController extends AppBaseController
                         }
                     }
                 } else {
-                    if (($isSameWeekDay && strtotime($slot[0]) > strtotime(date('h:i A'))) || ! $isSameWeekDay) {
-                        if (in_array((date('h:i A', strtotime($slot[0])).' - '.date('h:i A', strtotime($slot[1]))),
+                    if (($isSameWeekDay && strtotime($slot[0]) > strtotime(date('H:i'))) || ! $isSameWeekDay) {
+                        if (in_array((date('H:i', strtotime($slot[0])).' - '.date('H:i', strtotime($slot[1]))),
                             $bookingSlot)) {
                             break;
                         }
-                        $bookingSlot[] = date('h:i A', strtotime($slot[0])).' - '.date('h:i A', strtotime($slot[1]));
+                        $bookingSlot[] = date('H:i', strtotime($slot[0])).' - '.date('H:i', strtotime($slot[1]));
                     }
                 }
             }

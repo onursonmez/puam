@@ -148,11 +148,11 @@ class DoctorSessionRepository extends BaseRepository
         $startTimeArr = $input['startTimes'][$day] ?? [];
         $endTimeArr = $input['endTimes'][$day] ?? [];
         foreach ($startTimeArr as $key => $startTime) {
-            $slotStartTime = Carbon::instance(DateTime::createFromFormat('h:i A', $startTime));
+            $slotStartTime = Carbon::instance(DateTime::createFromFormat('H:i', $startTime));
             $tempArr = Arr::except($startTimeArr, [$key]);
             foreach ($tempArr as $tempKey => $tempStartTime) {
-                $start = Carbon::instance(DateTime::createFromFormat('h:i A', $tempStartTime));
-                $end = Carbon::instance(DateTime::createFromFormat('h:i A', $endTimeArr[$tempKey]));
+                $start = Carbon::instance(DateTime::createFromFormat('H:i', $tempStartTime));
+                $end = Carbon::instance(DateTime::createFromFormat('H:i', $endTimeArr[$tempKey]));
                 if ($slotStartTime->isBetween($start, $end)) {
                     return ['day' => $day, 'startTime' => $startTime, 'success' => false, 'key' => $key];
                 }

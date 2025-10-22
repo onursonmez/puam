@@ -58,7 +58,7 @@
                     {{ Form::select('service_id', isset(session()->get('data')['service']) ? session()->get('data')['service'] : [] , isset(session()->get('data')['service_id']) ? session()->get('data')['service_id'] : '',['class' => 'form-select', 'data-control'=>"select2", 'id'=> 'FrontAppointmentServiceId','placeholder' => __('messages.common.select_service') ]) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 name-details">
                 {{ Form::label('contact', __('messages.patient.contact_no').':', ['class' => 'form-label']) }}
                 {{ Form::tel( 'contact',null,['class' => 'form-control',
                 'placeholder' => __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
@@ -93,7 +93,7 @@
     <div class="col-lg-12">
         <div class="form-group">
             <label class="form-label" for="template-medical-description">{{ __('messages.appointment.appointment_description_label') }}:<span
-                    class="required"></span></label>
+                    class=""></span></label>
             <textarea id="template-medical-description" name="description" rows="5" style="min-height: 200px;"
                     class="form-control">{{ isset(session()->get('data')['description']) ? session()->get('data')['description'] : '' }}</textarea>
         </div>

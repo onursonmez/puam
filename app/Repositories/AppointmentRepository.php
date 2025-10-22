@@ -42,6 +42,33 @@ class AppointmentRepository extends BaseRepository
     }
 
     /**
+     * Convert 24-hour time format to 12-hour format
+     *
+     * @param string $time
+     * @return array
+     */
+    private function convert24HrTo12Hr($time)
+    {
+        // Saat ve dakikayı ayır
+        list($hour, $minute) = explode(':', $time);
+
+        // AM / PM belirle
+        $timeType = ($hour >= 12) ? 'PM' : 'AM';
+
+        // 12 saat formatına dönüştür
+        $hour = ($hour % 12 == 0) ? 12 : $hour % 12;
+
+        // Formatlı saat oluştur
+        $formattedTime = sprintf("%02d:%02d", $hour, $minute);
+
+        // Yanıtı döndür
+        return [
+            'time' => $formattedTime,
+            'time_type' => $timeType
+        ];
+    }
+
+    /**
      * @var array
      */
     protected $fieldSearchable = [
@@ -73,20 +100,24 @@ class AppointmentRepository extends BaseRepository
             DB::beginTransaction();
 
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
-            $fromTime = explode(' ', $input['from_time']);
-            $toTime = explode(' ', $input['to_time']);
-            $input['from_time'] = $fromTime[0];
-            $input['from_time_type'] = $fromTime[1];
-            $input['to_time'] = $toTime[0];
-            $input['to_time_type'] = $toTime[1];
+            // Store original 24-hour format times
+            $originalFromTime = $input['from_time'];
+            $originalToTime = $input['to_time'];
+            
+            $fromTime = $this->convert24HrTo12Hr($input['from_time']);
+            $toTime = $this->convert24HrTo12Hr($input['to_time']);
+            $input['from_time'] = $fromTime['time'];
+            $input['from_time_type'] = $fromTime['time_type'];
+            $input['to_time'] = $toTime['time'];
+            $input['to_time_type'] = $toTime['time_type'];
             $input['payment_type'] = Appointment::MANUALLY;
             $input['payment_method'] = Appointment::MANUALLY;
 
             $appointment = Appointment::create($input);
             $patient = Patient::whereId($input['patient_id'])->with('user')->first();
             $input['patient_name'] = $patient->user->full_name;
-            $input['original_from_time'] = $fromTime[0].' '.$fromTime[1];
-            $input['original_to_time'] = $toTime[0].' '.$toTime[1];
+            $input['original_from_time'] = $originalFromTime;
+            $input['original_to_time'] = $originalToTime;
             $service = Service::whereId($input['service_id'])->first();
             $input['service'] = $service->name;
 
@@ -164,14 +195,18 @@ class AppointmentRepository extends BaseRepository
                 $input['patient_id'] = $patient->id;
             }
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
-            $input['original_from_time'] = $input['from_time'];
-            $input['original_to_time'] = $input['to_time'];
-            $fromTime = explode(' ', $input['from_time']);
-            $toTime = explode(' ', $input['to_time']);
-            $input['from_time'] = $fromTime[0];
-            $input['from_time_type'] = $fromTime[1];
-            $input['to_time'] = $toTime[0];
-            $input['to_time_type'] = $toTime[1];
+            // Store original 24-hour format times
+            $originalFromTime = $input['from_time'];
+            $originalToTime = $input['to_time'];
+            
+            $fromTime = $this->convert24HrTo12Hr($input['from_time']);
+            $toTime = $this->convert24HrTo12Hr($input['to_time']);
+            $input['original_from_time'] = $originalFromTime;
+            $input['original_to_time'] = $originalToTime;
+            $input['from_time'] = $fromTime['time'];
+            $input['from_time_type'] = $fromTime['time_type'];
+            $input['to_time'] = $toTime['time'];
+            $input['to_time_type'] = $toTime['time_type'];
             $input['status'] = Appointment::BOOKED;
             $input['payment_type'] = Appointment::MANUALLY;
             $appointment = Appointment::create($input);
@@ -258,8 +293,8 @@ class AppointmentRepository extends BaseRepository
         foreach ($appointments as $key => $appointment) {
             $startTime = $appointment->from_time.' '.$appointment->from_time_type;
             $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $start = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$startTime);
+            $end = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$endTime);
             $data[$key]['id'] = $appointment->id;
             $data[$key]['title'] = $startTime.'-'.$endTime;
             $data[$key]['patientName'] = $appointment->patient->user->full_name;
@@ -287,8 +322,8 @@ class AppointmentRepository extends BaseRepository
         foreach ($appointments as $key => $appointment) {
             $startTime = $appointment->from_time.' '.$appointment->from_time_type;
             $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $start = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$startTime);
+            $end = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$endTime);
             $data[$key]['id'] = $appointment->id;
             $data[$key]['title'] = $startTime.'-'.$endTime;
             $data[$key]['doctorName'] = $appointment->doctor->user->full_name;
@@ -315,8 +350,8 @@ class AppointmentRepository extends BaseRepository
         foreach ($appointments as $key => $appointment) {
             $startTime = $appointment->from_time.' '.$appointment->from_time_type;
             $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $start = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$startTime);
+            $end = Carbon::createFromFormat('Y-m-d H:i', $appointment->date.' '.$endTime);
             $data[$key]['id'] = $appointment->id;
             $data[$key]['title'] = $startTime.'-'.$endTime;
             $data[$key]['doctorName'] = $appointment->doctor->user->full_name;

@@ -217,7 +217,7 @@ function getSlotByGap($startTime, $endTime)
         $endTime); // for create use 24 hours format later change format
     $slots = [];
     foreach ($period as $item) {
-        $slots[$item->format('h:i A')] = $item->format('h:i A');
+        $slots[$item->format('H:i')] = $item->format('H:i');
     }
 
     return $slots;
@@ -231,7 +231,7 @@ function getSchedulesTimingSlot()
     $period = new CarbonPeriod('00:00', '15 minutes', '24:00'); // for create use 24 hours format later change format
     $slots = [];
     foreach ($period as $item) {
-        $slots[$item->format('h:i A')] = $item->format('h:i A');
+        $slots[$item->format('H:i')] = $item->format('H:i');
     }
 
     return $slots;
