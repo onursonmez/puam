@@ -39,7 +39,6 @@ class PatientAppointmentBookMail extends Mailable
 
         return $this->view('emails.patient_appointment_booked_mail',
             compact('name', 'time', 'date', 'appointmentUniqueId', 'patientId', 'appointmentUniqueIdUnencrypted'))
-            ->markdown('emails.patient_appointment_booked_mail')
             ->subject($subject);
     }
 }

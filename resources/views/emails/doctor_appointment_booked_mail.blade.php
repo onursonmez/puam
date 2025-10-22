@@ -1,10 +1,15 @@
-@component('mail::layout')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ getAppName() }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
     {{-- Header --}}
-    @slot('header')
-        @component('mail::header', ['url' => config('app.url')])
-            <img src="{{ asset(getAppLogo()) }}" class="logo" alt="{{ getAppName() }}">
-        @endcomponent
-    @endslot
+    <div style="text-align: center; margin-bottom: 30px; padding: 20px; border-bottom: 1px solid #eee;">
+        <img src="{{ asset(getAppLogo()) }}" style="max-height: 60px;" alt="{{ getAppName() }}">
+    </div>
 
     {{-- Body --}}
     <div>
@@ -16,9 +21,8 @@
     </div>
 
     {{-- Footer --}}
-    @slot('footer')
-        @component('mail::footer')
-            <h6>{{ __('emails.footer', ['year' => date('Y'), 'app_name' => getAppName()]) }}</h6>
-        @endcomponent
-    @endslot
-@endcomponent
+    <div style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #eee; color: #666; font-size: 12px;">
+        <h6>{{ __('emails.footer', ['year' => date('Y'), 'app_name' => getAppName()]) }}</h6>
+    </div>
+</body>
+</html>
