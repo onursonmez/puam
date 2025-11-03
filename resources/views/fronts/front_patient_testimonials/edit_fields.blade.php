@@ -14,7 +14,7 @@
     <div class="col-lg-6">
         <div class="mb-5">
             {{ Form::label('short_description', __('messages.front_patient_testimonial.short_description').':', ['class' => 'form-label required']) }}
-            {{ Form::textarea('short_description', !empty($frontPatientTestimonial) ? $frontPatientTestimonial->short_description : null, ['class' => 'form-control', 'placeholder' => __('messages.front_patient_testimonial.short_description'), 'required', 'id' => 'shortDescription', 'rows'=> 5, 'maxlength' => '111']) }}
+            {{ Form::textarea('short_description', !empty($frontPatientTestimonial) ? $frontPatientTestimonial->short_description : null, ['class' => 'form-cont45 yaşındarol', 'placeholder' => __('messages.front_patient_testimonial.short_description'), 'required', 'id' => 'shortDescription', 'rows'=> 5, 'maxlength' => '500']) }}
         </div>
     </div>
     <div class="col-lg-6 mb-5">

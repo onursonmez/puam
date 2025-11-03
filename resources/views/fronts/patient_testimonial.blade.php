@@ -16,10 +16,12 @@
                         {{ $frontPatientTestimonial->short_description }}
                     </p>
                     <div class="d-flex align-items-center flex-wrap">
+                        <!--
                         <span class="me-3 image-circle image-mini image me-3">
                             <img src="{{ $frontPatientTestimonial->front_patient_profile }}" alt="" class="user-img" loading="lazy">
                         </span>
-                        <h3 class="profile-name mb-1 me-2">{{ $frontPatientTestimonial->name }}</h3>
+                        -->
+                        <h3 class="profile-name mb-1 me-2">{{ $frontPatientTestimonial->name }} ({{ $frontPatientTestimonial->designation }})</h3>
                         <h4 class="profile-info fw-light fs-6 mb-1"></h4>
                     </div>
                 </div>

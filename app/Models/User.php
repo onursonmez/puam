@@ -554,11 +554,22 @@ class User extends Authenticatable implements HasMedia
         'password' => 'required|same:password_confirmation|min:6',
         'dob' => 'nullable|date',
         'experience' => 'nullable|numeric',
-        'specializations' => 'required',
+        'specializations' => 'required|array',
+        'specializations.*' => 'required|exists:specializations,id',
         'gender' => 'required',
         'status' => 'nullable',
         'postal_code' => 'nullable',
         'profile' => 'nullable|mimes:jpeg,png,jpg|max:2000',
+        'blood_group' => 'nullable',
+        'address1' => 'nullable',
+        'address2' => 'nullable',
+        'country_id' => 'nullable|exists:countries,id',
+        'state_id' => 'nullable|exists:states,id',
+        'city_id' => 'nullable|exists:cities,id',
+        'twitter_url' => 'nullable|url',
+        'linkedin_url' => 'nullable|url',
+        'instagram_url' => 'nullable|url',
+        'region_code' => 'nullable',
     ];
 
     /**

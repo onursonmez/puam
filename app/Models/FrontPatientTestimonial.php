@@ -68,7 +68,7 @@ class FrontPatientTestimonial extends Model implements hasMedia
     public static $rules = [
         'name' => 'required',
         'designation' => 'required',
-        'short_description' => 'required|max:111',
+        'short_description' => 'required|max:500',
         'profile' => 'required|mimes:jpeg,jpg,png|max:2000',
     ];
 
@@ -80,7 +80,7 @@ class FrontPatientTestimonial extends Model implements hasMedia
     public static $editRules = [
         'name' => 'required',
         'designation' => 'required',
-        'short_description' => 'required|max:111',
+        'short_description' => 'required|max:500',
         'profile' => 'nullable|mimes:jpeg,jpg,png|max:2000',
     ];
 

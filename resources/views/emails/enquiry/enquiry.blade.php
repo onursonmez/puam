@@ -12,7 +12,7 @@
     {{-- Body --}}
     <div>
         <p>{!! __('emails.enquiry.hello') !!}, <b>{{ $name }}</b></p>
-        <p>Soru mesajınız başarıyla alındı.</p>
+        <p>PUAM ile iletişime geçtiğiniz için teşekkür ederiz. Uzmanlarımız en kısa zamanda size dönüş yapacaktır. Gösterdiğiniz ilgi için teşekür ederiz.</p>
         <p>{{ __('emails.enquiry.thank_you') }}</p>
     </div>
 

@@ -6,6 +6,6 @@ function loadFrontTestimonialData () {
     }
 
     $('#shortDescription').on('keyup', function () {
-        $('#shortDescription').attr('maxlength', 111)
+        $('#shortDescription').attr('maxlength', 500)
     })
 }

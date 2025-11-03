@@ -123,10 +123,10 @@ return [
 
     'web' => [
         'enter_your_email' => 'Enter Your Email',
-        'emergency_help' => 'Emergency Help',
+        'emergency_help' => 'Scientific Approach',
         'qualified_doctors' => 'Qualified Therapists',
         'best_professionals' => 'Best Professionals',
-        'medical_treatment' => 'Medical Treatment',
+        'medical_treatment' => 'Ethical Processes',
         'testimonial' => 'Testimonial',
         'what_did_they_say_about_us' => 'What did they say about us?',
         'our_team' => 'Our Team',
