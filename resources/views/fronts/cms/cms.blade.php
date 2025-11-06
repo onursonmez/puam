@@ -12,7 +12,7 @@
                 </div>
             </div>
             {{Form::hidden('term_conditionData',$cmsData['terms_conditions'],['id'=>'cmsTermConditionData'])}}
-            {{Form::hidden('privacy_policyData',$cmsData['terms_conditions'],['id'=>'cmsPrivacyPolicyData'])}}
+            {{Form::hidden('privacy_policyData',$cmsData['privacy_policy'],['id'=>'cmsPrivacyPolicyData'])}}
             <div class="card">
                 <div class="card-body p-12">
                     {{ Form::open(['route' => 'cms.update', 'id' => 'addCMSForm','files' => true]) }}
