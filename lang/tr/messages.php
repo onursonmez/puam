@@ -42,7 +42,7 @@ return [
 'enquiries' => 'İletişim Formu',
 'subscribers' => 'Aboneler',
 'privacy_policy' => 'Gizlilik Politikası',
-'terms_conditions' => 'Şartlar ve Koşullar',
+'terms_conditions' => 'Bilgilendirilmiş Onam Formu',
 'how_we_care' => 'Nasıl İlgileniyoruz',
 'all_rights_reserved' => 'Tüm hakları saklıdır',
 'this_is_an_alert' => 'Bu bir uyarıdır',
@@ -198,7 +198,7 @@ return [
     'already_have_an_account' => 'Zaten bir hesabınız var mı?',
     'sign_in_here' => 'Buradan giriş yapın',
     'i_agree' => 'Kabul Ediyorum',
-    'terms_and_conditions' => 'Şartlar ve Koşullar',
+    'terms_and_conditions' => 'Bilgilendirilmiş Onam Formu',
     'sign_in' => 'Giriş Yap',
     'new_here' => 'Yeni misiniz?',
     'create_an_account' => 'Hesap Oluştur',
@@ -761,13 +761,13 @@ return [
 
 'cms' => [
     'cms' => 'CMS',
-    'terms_conditions' => 'Şartlar ve Koşullar',
+    'terms_conditions' => 'Bilgilendirilmiş Onam Formu',
     'privacy_policy' => 'Gizlilik Politikası',
     'about_image' => 'Hakkında Görseli',
     'title_no_white_space' => 'Hakkında Başlık alanı yalnızca boşluk içeremez',
     'description_no_white_space' => 'Kısa Açıklama alanı yalnızca boşluk içeremez',
     'experience_required' => 'Deneyim alanı gereklidir.',
-    'Terms_Conditions_required' => 'Şartlar ve Koşullar gereklidir',
+    'Terms_Conditions_required' => 'Bilgilendirilmiş Onam Formu gereklidir',
     'privacy_policy_required.' => 'Gizlilik Politikası gereklidir.',
 ],
 

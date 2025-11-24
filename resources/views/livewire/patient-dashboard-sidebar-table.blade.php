@@ -88,8 +88,11 @@
                                 </td>
                                 <td class="mb-1 fs-6 text-muted fw-bold text-center">
                                     <span class="badge bg-light-info">
-                                        {{ $appointment->from_time }} {{ $appointment->from_time_type }}
-                                        - {{ $appointment->to_time }} {{ $appointment->to_time_type }}
+                                        @php
+                                            $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment->from_time . ' ' . $appointment->from_time_type);
+                                            $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment->to_time . ' ' . $appointment->to_time_type);
+                                        @endphp
+                                        {{ $from->format('H:i') }} - {{ $to->format('H:i') }}
                                     </span>
                                 </td>
                             </tr>
@@ -141,9 +144,12 @@
                                 </td>
                                 <td class="mb-1 fs-6 text-muted fw-bold text-center">
                                     <span class="badge bg-light-info">
+                                        @php
+                                            $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment->from_time . ' ' . $appointment->from_time_type);
+                                            $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment->to_time . ' ' . $appointment->to_time_type);
+                                        @endphp
                                         {{ \Carbon\Carbon::parse($appointment->date)->isoFormat('DD MMM YYYY') }}
-                                        {{ $appointment->from_time }} {{ $appointment->from_time_type }}
-                                        - {{ $appointment->to_time }} {{ $appointment->to_time_type }}
+                                        {{ $from->format('H:i') }} - {{ $to->format('H:i') }}
                                     </span>
                                 </td>
                             </tr>
