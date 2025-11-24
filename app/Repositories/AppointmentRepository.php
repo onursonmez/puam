@@ -182,8 +182,7 @@ class AppointmentRepository extends BaseRepository
                 }
                 $input['original_password'] = Str::random(8);
                 $input['type'] = User::PATIENT;
-                $userFields = ['first_name', 'last_name', 'email', 'password', 'type', 'region_code', 'contact', 'email_verified_at'];
-                $input['email_verified_at'] = Carbon::now();
+                $userFields = ['first_name', 'last_name', 'email', 'password', 'type', 'region_code', 'contact'];
                 $input['password'] = Hash::make($input['original_password']);
                 /** @var User $user */
                 $user = User::create(Arr::only($input, $userFields));

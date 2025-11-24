@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->integer('gender')->nullable();
             $table->boolean('status')->default(1);
-            $table->string('language')->default('en')->nullable();
+            $table->string('language')->default('tr')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('type')->nullable();
