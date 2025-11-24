@@ -146,7 +146,7 @@
                                 {{ __('messages.user.account_setting') }}
                             </a>
                         </li>
-                        @if((is_impersonating() === false))
+                        
                             <li>
                                 <a class="dropdown-item text-gray-900" id="changePassword" href="javascript:void(0)">
                                     <span class="dropdown-icon me-4 text-gray-600">
@@ -155,7 +155,7 @@
                                     {{ __('messages.user.change_password') }}
                                 </a>
                             </li>
-                        @endif
+                        
                         @if(getLogInUser()->hasRole('doctor') || getLogInUser()->hasRole('patient'))
                         <li>
                             <a class="dropdown-item text-gray-900" id="emailNotification" href="javascript:void(0)">

@@ -126,21 +126,84 @@ class DoctorSessionRepository extends BaseRepository
         $endTimeArr = $input['endTimes'][$day] ?? [];
         if (count($startTimeArr) != 0 && count($endTimeArr) != 0) {
             foreach ($startTimeArr as $key => $startTime) {
-                $startTimeData = explode(' ', $startTime);
-                $endTimeData = explode(' ', $endTimeArr[$key]);
+                // Parse time format and convert if necessary
+                $startTimeData = $this->parseTimeString($startTime);
+                $endTimeData = $this->parseTimeString($endTimeArr[$key]);
+                
                 $doctorSession->sessionWeekDays()->create([
                     'doctor_id' => $doctorSession->doctor_id,
                     'doctor_session_id' => $doctorSession->id,
                     'day_of_week' => $day,
-                    'start_time' => $startTimeData[0],
-                    'start_time_type' => $startTimeData[1],
-                    'end_time' => $endTimeData[0],
-                    'end_time_type' => $endTimeData[1],
+                    'start_time' => $startTimeData['time'],
+                    'start_time_type' => $startTimeData['type'],
+                    'end_time' => $endTimeData['time'],
+                    'end_time_type' => $endTimeData['type'],
                 ]);
             }
         }
 
         return true;
+    }
+
+    /**
+     * Parse time string and handle both 24-hour and 12-hour formats
+     *
+     * @param string $timeString - Can be "00:00", "23:45", "12:00 AM", "11:45 PM", etc.
+     * @return array - ['time' => 'HH:MM', 'type' => 'AM'|'PM']
+     */
+    private function parseTimeString($timeString): array
+    {
+        $timeString = trim($timeString);
+        
+        // Check if it contains AM/PM (12-hour format)
+        if (preg_match('/^(\d{1,2}:\d{2})\s*(AM|PM)$/i', $timeString, $matches)) {
+            // Already in 12-hour format
+            return [
+                'time' => $matches[1],
+                'type' => strtoupper($matches[2])
+            ];
+        }
+        
+        // Check if it's 24-hour format (HH:MM)
+        if (preg_match('/^(\d{1,2}):(\d{2})$/', $timeString, $matches)) {
+            $hour = (int)$matches[1];
+            $minute = $matches[2];
+            
+            // Convert 24-hour to 12-hour format
+            if ($hour == 0) {
+                // 00:xx becomes 12:xx AM
+                return [
+                    'time' => "12:{$minute}",
+                    'type' => 'AM'
+                ];
+            } elseif ($hour < 12) {
+                // 01:xx to 11:xx becomes 1:xx to 11:xx AM
+                return [
+                    'time' => "{$hour}:{$minute}",
+                    'type' => 'AM'
+                ];
+            } elseif ($hour == 12) {
+                // 12:xx becomes 12:xx PM
+                return [
+                    'time' => "12:{$minute}",
+                    'type' => 'PM'
+            ];
+            } else {
+                // 13:xx to 23:xx becomes 1:xx to 11:xx PM
+                $hour12 = $hour - 12;
+                return [
+                    'time' => "{$hour12}:{$minute}",
+                    'type' => 'PM'
+                ];
+            }
+        }
+        
+        // Fallback - if format is unrecognized, assume it's already proper format
+        $parts = explode(' ', $timeString);
+        return [
+            'time' => $parts[0] ?? '12:00',
+            'type' => $parts[1] ?? 'AM'
+        ];
     }
 
     public function validateSlotTiming($input, $day)
