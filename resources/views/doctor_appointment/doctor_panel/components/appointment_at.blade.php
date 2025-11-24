@@ -1,6 +1,11 @@
 <div class="badge bg-primary">
-    <div class="mb-2">{{$row->from_time}} {{ $row->from_time_type }}
-        - {{$row->to_time}} {{ $row->to_time_type}}</div>
+    <div class="mb-2">
+        @php
+            $from = \Carbon\Carbon::createFromFormat('h:i A', $row->from_time . ' ' . $row->from_time_type);
+            $to = \Carbon\Carbon::createFromFormat('h:i A', $row->to_time . ' ' . $row->to_time_type);
+        @endphp
+        {{ $from->format('H:i') }} - {{ $to->format('H:i') }}
+    </div>
     <div class="">{{ \Carbon\Carbon::parse($row->date)->isoFormat('DD MMM YYYY') }}
     </div>
 </div>

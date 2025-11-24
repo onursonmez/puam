@@ -14,7 +14,11 @@
                             <label class="col-lg-4 fw-bold text-muted">{{ __('messages.appointment.appointment_at') }}</label>
                             <div class="col-lg-8 fv-row ps-2">
                                 <span class="badge badge-light-info">
-                                    {{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY')}} {{$appointment['data']->from_time}} {{$appointment['data']->from_time_type}} - {{$appointment['data']->to_time}} {{$appointment['data']->to_time_type}}
+                                    @php
+                                        $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment['data']->from_time . ' ' . $appointment['data']->from_time_type);
+                                        $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment['data']->to_time . ' ' . $appointment['data']->to_time_type);
+                                    @endphp
+                                    {{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY') }} {{ $from->format('H:i') }} - {{ $to->format('H:i') }}
                                 </span>
                             </div>
                         </div>

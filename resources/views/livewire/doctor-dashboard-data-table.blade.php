@@ -38,9 +38,13 @@
                                 </td>
                                 <td class="mb-1 fs-6 text-muted fw-bold text-center">
                                     <div class="badge bg-light-info">
-                                        <div class="mb-2">{{ $appointment['from_time'] }}
-                                            {{ $appointment['from_time_type'] }} - {{ $appointment['to_time'] }}
-                                            {{ $appointment['to_time_type'] }}</div>
+                                        <div class="mb-2">
+                                            @php
+                                                $from = \Carbon\Carbon::createFromFormat('h:i A', $appointment['from_time'] . ' ' . $appointment['from_time_type']);
+                                                $to = \Carbon\Carbon::createFromFormat('h:i A', $appointment['to_time'] . ' ' . $appointment['to_time_type']);
+                                            @endphp
+                                            {{ $from->format('H:i') }} - {{ $to->format('H:i') }}
+                                        </div>
                                         <div class="">
                                             {{ \Carbon\Carbon::parse($appointment['date'])->isoFormat('DD MMM YYYY') }}
                                         </div>
