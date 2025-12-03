@@ -20,9 +20,9 @@ class SetLanguage
         $lan = Setting::where('key','language')->get()->toArray()[0];
 
         if (! isset($localeLanguage) ) {
-
+            // İlk yüklemede session language'ı ayarlardaki default language olarak set et
+            Session::put('languageName', $lan['value']);
             \App::setLocale($lan['value']);
-
         } else {
             \App::setLocale($localeLanguage);
         }

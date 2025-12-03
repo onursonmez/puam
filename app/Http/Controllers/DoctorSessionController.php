@@ -169,11 +169,16 @@ class DoctorSessionController extends AppBaseController
         $date = Carbon::createFromFormat('Y-m-d', $request->date);
         $doctorWeekDaySessions = WeekDay::whereDayOfWeek($date->dayOfWeek)->whereDoctorId($doctorId)->with('doctorSession')->get();
         if ($doctorWeekDaySessions->count() == 0) {
-            if (! empty(getLogInUser()->language)) {
-                App::setLocale(getLogInUser()->language);
-            } else {
-                App::setLocale($request->session()->get('languageName'));
+            // Set locale properly - check session first, then user language, then default to 'tr'
+            $locale = 'tr'; // Default fallback
+            
+            if ($request->session()->has('languageName')) {
+                $locale = $request->session()->get('languageName');
+            } elseif (getLogInUser() && !empty(getLogInUser()->language)) {
+                $locale = getLogInUser()->language;
             }
+            
+            App::setLocale($locale);
 
             return $this->sendError(__('messages.flash.no_available_slots'));
         }
