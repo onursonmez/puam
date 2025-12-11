@@ -211,11 +211,17 @@ class DoctorSessionRepository extends BaseRepository
         $startTimeArr = $input['startTimes'][$day] ?? [];
         $endTimeArr = $input['endTimes'][$day] ?? [];
         foreach ($startTimeArr as $key => $startTime) {
-            $slotStartTime = Carbon::instance(DateTime::createFromFormat('H:i', $startTime));
+            // Convert the time to 24-hour format for validation
+            $startTime24 = $this->convertTo24Hour($startTime);
+            $slotStartTime = Carbon::instance(DateTime::createFromFormat('H:i', $startTime24));
+            
             $tempArr = Arr::except($startTimeArr, [$key]);
             foreach ($tempArr as $tempKey => $tempStartTime) {
-                $start = Carbon::instance(DateTime::createFromFormat('H:i', $tempStartTime));
-                $end = Carbon::instance(DateTime::createFromFormat('H:i', $endTimeArr[$tempKey]));
+                $tempStartTime24 = $this->convertTo24Hour($tempStartTime);
+                $tempEndTime24 = $this->convertTo24Hour($endTimeArr[$tempKey]);
+                
+                $start = Carbon::instance(DateTime::createFromFormat('H:i', $tempStartTime24));
+                $end = Carbon::instance(DateTime::createFromFormat('H:i', $tempEndTime24));
                 if ($slotStartTime->isBetween($start, $end)) {
                     return ['day' => $day, 'startTime' => $startTime, 'success' => false, 'key' => $key];
                 }
@@ -223,5 +229,43 @@ class DoctorSessionRepository extends BaseRepository
         }
 
         return ['success' => true];
+    }
+
+    /**
+     * Convert time string to 24-hour format for validation purposes
+     *
+     * @param string $timeString
+     * @return string
+     */
+    private function convertTo24Hour($timeString): string
+    {
+        $timeString = trim($timeString);
+        
+        // Check if it contains AM/PM (12-hour format)
+        if (preg_match('/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i', $timeString, $matches)) {
+            $hour = (int)$matches[1];
+            $minute = $matches[2];
+            $ampm = strtoupper($matches[3]);
+            
+            if ($ampm === 'AM') {
+                if ($hour == 12) {
+                    $hour = 0; // 12 AM becomes 00
+                }
+            } else { // PM
+                if ($hour != 12) {
+                    $hour += 12; // Add 12 hours for PM (except 12 PM)
+                }
+            }
+            
+            return sprintf('%02d:%s', $hour, $minute);
+        }
+        
+        // If it's already in 24-hour format, return as is
+        if (preg_match('/^(\d{1,2}):(\d{2})$/', $timeString)) {
+            return $timeString;
+        }
+        
+        // Fallback
+        return $timeString;
     }
 }

@@ -83,6 +83,44 @@ class WeekDay extends Model
         return $this->end_time.' '.$this->end_time_type;
     }
 
+    /**
+     * Get start time in 24-hour format for dropdown selection
+     */
+    public function getStartTime24HAttribute()
+    {
+        return $this->convertTo24HourFormat($this->start_time, $this->start_time_type);
+    }
+
+    /**
+     * Get end time in 24-hour format for dropdown selection
+     */
+    public function getEndTime24HAttribute()
+    {
+        return $this->convertTo24HourFormat($this->end_time, $this->end_time_type);
+    }
+
+    /**
+     * Convert 12-hour format to 24-hour format
+     */
+    private function convertTo24HourFormat($time, $type)
+    {
+        $timeParts = explode(':', $time);
+        $hour = (int)$timeParts[0];
+        $minute = $timeParts[1];
+        
+        if ($type === 'AM') {
+            if ($hour == 12) {
+                $hour = 0; // 12 AM becomes 00
+            }
+        } else { // PM
+            if ($hour != 12) {
+                $hour += 12; // Add 12 hours for PM (except 12 PM)
+            }
+        }
+        
+        return sprintf('%02d:%s', $hour, $minute);
+    }
+
     public function doctorSession()
     {
         return $this->belongsTo(DoctorSession::class);
