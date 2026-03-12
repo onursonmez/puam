@@ -41,6 +41,50 @@
                     </tr>
                 </tbody>
             </table>
+
+            <p style="margin-bottom: 15px; font-weight: 600; color: #333;">
+                Kredi kartı ile ödeme yapmak için aldığınız hizmetin sağında yer alan kredi kartı ile öde tuşuna basarak ödeme sayfasına yönlendirileceksiniz. Ödeme işlemini gerçekleştirdikten sonra herhangi bir işlem yapmanıza gerek yoktur, randevunuz otomatik olarak onaylanacaktır. 
+            </p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <thead>
+                    <tr style="background-color: #e9ecef;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Hizmet</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Ücret</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Ödeme İşlemi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Psikoterapi</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">2000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/7BC9E0EC">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Psikoterapi Akademisyen</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">4000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/96BDF2E5">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Çift ve Aile Psikoterapisi</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">5000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/3FB1D145">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Süpervizyon Kapsamında Seans</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">500 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/7389462A">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 

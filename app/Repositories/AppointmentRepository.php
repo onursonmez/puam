@@ -140,6 +140,9 @@ class AppointmentRepository extends BaseRepository
                 Mail::to($doctor->user->email)->send(new DoctorAppointmentBookMail($input));
             }
 
+            $input['doctor_name'] = 'PUAM';
+            Mail::to("puam@fsm.edu.tr")->send(new DoctorAppointmentBookMail($input));
+
             $doctorNotification = Notification::create([
                 'title' => $patient->user->full_name.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
                 'type' => Notification::BOOKED,
@@ -230,6 +233,10 @@ class AppointmentRepository extends BaseRepository
             if ($doctor->user->email_notification) {
                 Mail::to($doctor->user->email)->send(new DoctorAppointmentBookMail($input));
             }
+
+            $input['doctor_name'] = 'PUAM';
+            Mail::to("puam@fsm.edu.tr")->send(new DoctorAppointmentBookMail($input));
+            
             $doctorNotification = Notification::create([
                 'title' => $patientFullName.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
                 'type' => Notification::BOOKED,

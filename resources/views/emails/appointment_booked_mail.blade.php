@@ -32,7 +32,7 @@
 
         <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-left: 4px solid #007bff;">
             <p style="margin-bottom: 15px; font-weight: 600; color: #333;">
-                Ödemenizi banka havalesi/EFT ile aşağıdaki banka hesap bilgilerine gönderebilirsiniz. Açıklama kısmına <strong>{{ $appointmentUniqueIdUnencrypted }}</strong> yazmayı unutmayınız.
+                Ödemenizi banka havalesi/EFT ile aşağıdaki banka hesap bilgilerine gönderebilirsiniz. Randevunuzun kesinleşebilmesi için, belirtilen hesaba ödemenin yapılması ve ödeme dekontunun puam@fsm.edu.tr adresine iletilmesi gerekmektedir. Açıklama kısmına terapistinizin adı ve "görüşme" ifadesi yazınız.
             </p>
             
             <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
@@ -46,6 +46,50 @@
                     <tr>
                         <td style="padding: 12px; border: 1px solid #dee2e6;">Fatih Sultan Mehmet Vakıf Üniversitesi İktisadi İşletmesi</td>
                         <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">TR30 0021 0000 0000 2145 3000 04</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-bottom: 15px; font-weight: 600; color: #333;">
+                Kredi kartı ile ödeme yapmak için aldığınız hizmetin sağında yer alan kredi kartı ile öde tuşuna basarak ödeme sayfasına yönlendirileceksiniz. Ödeme işlemini gerçekleştirdikten sonra herhangi bir işlem yapmanıza gerek yoktur, randevunuz otomatik olarak onaylanacaktır. 
+            </p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <thead>
+                    <tr style="background-color: #e9ecef;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Hizmet</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Ücret</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6; font-weight: 600;">Ödeme İşlemi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Psikoterapi</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">2000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/7BC9E0EC">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Psikoterapi Akademisyen</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">4000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/96BDF2E5">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Çift ve Aile Psikoterapisi</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">5000 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/3FB1D145">Kredi Kartı İle Öde</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">Süpervizyon Kapsamında Seans</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6;">500 TL</td>
+                        <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-weight: 600;">
+                            <a href="https://onlineodeme.fsm.edu.tr/paymentgroup/7389462A">Kredi Kartı İle Öde</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
