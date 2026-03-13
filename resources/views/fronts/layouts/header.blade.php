@@ -63,16 +63,8 @@
                         </ul>
                         <div class="text-lg-end header-btn-grp ms-xxl-5 ms-lg-3">
                                 @if(getLogInUser())
-                                    @if(getLogInUser()->hasRole('doctor'))
-                                        <a href="{{ route('doctors.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" >{{ __('messages.dashboard') }}</a>
-                                    @elseif(getLogInUser()->hasRole('patient'))
-                                        <a href="{{ route('patients.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" >{{ __('messages.dashboard') }}</a>
-                                    @else
-                                        <a href="{{ route('admin.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" >{{ __('messages.dashboard') }}</a>
-                                    @endif
+                                    <a href="{{ url(getDashboardURL()) }}"
+                                       class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" >{{ __('messages.dashboard') }}</a>
                                 @else
                                     <a href="{{ route('login') }}"
                                        class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" >{{ __('messages.login') }}</a>
