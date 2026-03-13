@@ -387,6 +387,7 @@ return [
         'currency_settings' => 'Настройки валюты',
         'general_details' => 'Общие сведения',
         'clinic_name' => 'Название клиники',
+        'room_count' => 'Количество комнат',
         'specialities' => 'Специальности',
         'currency' => 'Валюта',
         'prefix' => 'Приставка',

@@ -8,6 +8,7 @@ use App\Models\Appointment;
 use App\Models\ClinicSchedule;
 use App\Models\DoctorHoliday;
 use App\Models\DoctorSession;
+use App\Models\Setting;
 use App\Models\WeekDay;
 use App\Repositories\DoctorSessionRepository;
 use Carbon\Carbon;
@@ -183,6 +184,8 @@ class DoctorSessionController extends AppBaseController
             return $this->sendError(__('messages.flash.no_available_slots'));
         }
 
+        $maxRooms = (int) (Setting::where('key', 'room_count')->value('value') ?? 1);
+
         $appointments = Appointment::whereDoctorId($doctorId)->whereIn('status',
             [Appointment::BOOKED, Appointment::CHECK_IN, Appointment::CHECK_OUT])->get();
         $bookedSlot = [];
@@ -191,6 +194,18 @@ class DoctorSessionController extends AppBaseController
             if ($appointment->date == $request->date) {
                 $bookedSlot[] = $appointment->from_time.' '.$appointment->from_time_type.' - '.$appointment->to_time.' '.$appointment->to_time_type;
             }
+        }
+
+        // Collect all appointment time ranges on this date across all doctors to enforce room capacity
+        $allDayAppointments = Appointment::where('date', $holidaydate)
+            ->whereIn('status', [Appointment::BOOKED, Appointment::CHECK_IN, Appointment::CHECK_OUT])
+            ->get();
+        $allDayAppointmentTimes = [];
+        foreach ($allDayAppointments as $appt) {
+            $allDayAppointmentTimes[] = [
+                'from' => strtotime($appt->from_time.' '.$appt->from_time_type),
+                'to'   => strtotime($appt->to_time.' '.$appt->to_time_type),
+            ];
         }
 
         foreach ($doctorWeekDaySessions as $index => $doctorWeekDaySession) {
@@ -225,6 +240,17 @@ class DoctorSessionController extends AppBaseController
                             if (in_array(($slotStartTime.' - '.$slotEndTime), $bookingSlot)) {
                                 break;
                             }
+                            $overlappingRooms = 0;
+                            $slotFrom = strtotime($slotStartTime);
+                            $slotTo = strtotime($slotEndTime);
+                            foreach ($allDayAppointmentTimes as $apptTime) {
+                                if ($apptTime['from'] < $slotTo && $apptTime['to'] > $slotFrom) {
+                                    $overlappingRooms++;
+                                }
+                            }
+                            if ($overlappingRooms >= $maxRooms) {
+                                continue;
+                            }
                             $bookingSlot[] = $slotStartTime.' - '.$slotEndTime;
                         }
                     }
@@ -234,8 +260,19 @@ class DoctorSessionController extends AppBaseController
                             $bookingSlot)) {
                             break;
                         }
-                        $bookingSlot[] = date('H:i', strtotime($slot[0])).' - '.date('H:i', strtotime($slot[1]));
-                    }
+                        $slotKey0 = date('H:i', strtotime($slot[0])).' - '.date('H:i', strtotime($slot[1]));
+                        $overlappingRooms0 = 0;
+                        $slotFrom0 = strtotime($slot[0]);
+                        $slotTo0 = strtotime($slot[1]);
+                        foreach ($allDayAppointmentTimes as $apptTime) {
+                            if ($apptTime['from'] < $slotTo0 && $apptTime['to'] > $slotFrom0) {
+                                $overlappingRooms0++;
+                            }
+                        }
+                        if ($overlappingRooms0 >= $maxRooms) {
+                            continue;
+                        }
+                        $bookingSlot[] = $slotKey0;                    }
                 }
             }
         }

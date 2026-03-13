@@ -27,6 +27,12 @@
                     </div>
                 </div>
                 <div class="row mb-6">
+                    {{ Form::label('room_count', __('messages.setting.room_count').':', ['class' => 'col-lg-4 form-label required']) }}
+                    <div class="col-lg-8">
+                        {{ Form::number('room_count', $setting['room_count'], ['class' => 'form-control','placeholder'=>__('messages.setting.room_count'),'required']) }}
+                    </div>
+                </div>
+                <div class="row mb-6">
                     {{ Form::label('contact_no', __('messages.patient.contact_no').':', ['class' => 'col-lg-4 form-label required']) }}
                     <div class="col-lg-8">
                         {{ Form::tel('contact_no','+'.$setting['region_code'].$setting['contact_no'] ?? null, ['class' => 'form-control', 'placeholder' => __('messages.patient.contact_no'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}

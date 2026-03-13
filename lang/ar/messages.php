@@ -388,6 +388,7 @@ return [
         'currency_settings' => 'إعدادات العملة',
         'general_details' => 'تفاصيل عامة',
         'clinic_name' => 'اسم العيادة',
+        'room_count' => 'عدد الغرف',
         'specialities' => 'التخصصات',
         'currency' => 'العملة',
         'prefix' => 'بادئة',

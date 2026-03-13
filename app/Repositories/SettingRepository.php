@@ -44,6 +44,7 @@ class SettingRepository extends BaseRepository
         if ($inputArr['sectionName'] == 'general') {
             $inputArr['clinic_name'] = (empty($inputArr['clinic_name'])) ? '' : $inputArr['clinic_name'];
             $inputArr['contact_no'] = (empty($inputArr['contact_no'])) ? '' : $inputArr['contact_no'];
+            $inputArr['room_count'] = (empty($inputArr['room_count'])) ? '' : $inputArr['room_count'];
             $inputArr['email'] = (empty($inputArr['email'])) ? '' : $inputArr['email'];
             $inputArr['specialities'] = (empty($inputArr['specialities'])) ? '1' : json_encode($inputArr['specialities']);
             $inputArr['currency'] = (empty($inputArr['currency'])) ? '1' : $inputArr['currency'];

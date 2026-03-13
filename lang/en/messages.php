@@ -123,10 +123,10 @@ return [
 
     'web' => [
         'enter_your_email' => 'Enter Your Email',
-        'emergency_help' => 'Scientific Approach',
+        'emergency_help' => 'Emergency Help',
         'qualified_doctors' => 'Qualified Therapists',
         'best_professionals' => 'Best Professionals',
-        'medical_treatment' => 'Ethical Processes',
+        'medical_treatment' => 'Medical Treatment',
         'testimonial' => 'Testimonial',
         'what_did_they_say_about_us' => 'What did they say about us?',
         'our_team' => 'Our Team',
@@ -400,6 +400,7 @@ return [
         'currency_settings' => 'Currency Settings',
         'general_details' => 'General Details',
         'clinic_name' => 'Clinic Name',
+        'room_count' => 'Room Count',
         'specialities' => 'Specialities',
         'currency' => 'Currency',
         'prefix' => 'Prefix',

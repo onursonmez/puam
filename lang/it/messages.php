@@ -399,6 +399,7 @@ return [
         'currency_settings' => 'Impostazioni valuta',
         'general_details' => 'Dettagli generali',
         'clinic_name' => 'Nome clinica',
+        'room_count' => 'Numero di stanze',
         'specialities' => 'Specialità',
         'currency' => 'Moneta',
         'prefix' => 'Prefisso',

@@ -35,6 +35,7 @@ class UpdateSettingRequest extends FormRequest
                 'email' => 'required|email:filter',
                 'specialities' => 'required',
                 'clinic_name' => 'required',
+                'room_count' => 'required',
                 'contact_no' => 'required',
                 'logo' => 'image|mimes:jpeg,png,jpg',
                 'favicon' => 'image|mimes:png|dimensions:width=32,height=32',

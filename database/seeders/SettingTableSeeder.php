@@ -16,6 +16,7 @@ class SettingTableSeeder extends Seeder
         $favicon = ('assets/image/infyCare-favicon.ico');
 
         Setting::create(['key' => 'clinic_name', 'value' => 'Clinic Appointment Management']);
+        Setting::create(['key' => 'room_count', 'value' => 2]);
         Setting::create(['key' => 'contact_no', 'value' => '1234567890']);
         Setting::create(['key' => 'email', 'value' => 'infycare@email.com']);
         Setting::create(['key' => 'specialities', 'value' => '1']);

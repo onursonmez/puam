@@ -386,6 +386,7 @@ return [
         'currency_settings' => 'Configurações de moeda',
         'general_details' => 'Detalhes Gerais',
         'clinic_name' => 'Nome da clínica',
+        'room_count' => 'Número de quartos',
         'specialities' => 'Especialidades',
         'currency' => 'Moeda',
         'prefix' => 'Prefixo',

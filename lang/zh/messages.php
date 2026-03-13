@@ -385,6 +385,7 @@ return [
         'currency_settings' => '货币设置',
         'general_details' => '一般详情',
         'clinic_name' => '诊所名称',
+        'room_count' => '房间数量',
         'specialities' => '专业',
         'currency' => '货币',
         'prefix' => '前缀',
