@@ -122,7 +122,7 @@ class AppointmentRepository extends BaseRepository
             $input['service'] = $service->name;
 
             if ($patient->user->email_notification) {
-                Mail::to($patient->user->email)->queue(new PatientAppointmentBookMail($input));
+                Mail::to($patient->user->email)->locale('tr')->queue(new PatientAppointmentBookMail($input));
             }
 
             $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.Carbon::parse($input['date'])->format('jS M, Y');
@@ -137,11 +137,11 @@ class AppointmentRepository extends BaseRepository
             $doctor = Doctor::whereId($input['doctor_id'])->with('user')->first();
             $input['doctor_name'] = $doctor->user->full_name;
             if ($doctor->user->email_notification) {
-                Mail::to($doctor->user->email)->queue(new DoctorAppointmentBookMail($input));
+                Mail::to($doctor->user->email)->locale('tr')->queue(new DoctorAppointmentBookMail($input));
             }
 
             $input['doctor_name'] = 'PUAM';
-            Mail::to("puam@fsm.edu.tr")->queue(new DoctorAppointmentBookMail($input));
+            Mail::to("puam@fsm.edu.tr")->locale('tr')->queue(new DoctorAppointmentBookMail($input));
 
             $doctorNotification = Notification::create([
                 'title' => $patient->user->full_name.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
@@ -213,7 +213,7 @@ class AppointmentRepository extends BaseRepository
             $input['payment_type'] = Appointment::MANUALLY;
             $appointment = Appointment::create($input);
 
-            Mail::to($input['email'])->queue(new AppointmentBookedMail($input));
+            Mail::to($input['email'])->locale('tr')->queue(new AppointmentBookedMail($input));
             $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $user->full_name;
             $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->id : $user->id;
             $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.\Carbon\Carbon::parse($input['date'])->format('jS M, Y');
@@ -231,11 +231,11 @@ class AppointmentRepository extends BaseRepository
             $service = Service::whereId($input['service_id'])->first();
             $input['service'] = $service->name;
             if ($doctor->user->email_notification) {
-                Mail::to($doctor->user->email)->queue(new DoctorAppointmentBookMail($input));
+                Mail::to($doctor->user->email)->locale('tr')->queue(new DoctorAppointmentBookMail($input));
             }
 
             $input['doctor_name'] = 'PUAM';
-            Mail::to("puam@fsm.edu.tr")->queue(new DoctorAppointmentBookMail($input));
+            Mail::to("puam@fsm.edu.tr")->locale('tr')->queue(new DoctorAppointmentBookMail($input));
             
             $doctorNotification = Notification::create([
                 'title' => $patientFullName.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
