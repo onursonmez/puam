@@ -47,7 +47,7 @@ class EnquiryController extends AppBaseController
             $input['appName'] = getAppName();
 
             Mail::to($input['email'])
-                ->send(new EnquiryMails('emails.enquiry.enquiry', __('messages.flash.enquire_sent'), $input));
+                ->queue(new EnquiryMails('emails.enquiry.enquiry', __('messages.flash.enquire_sent'), $input));
 
             DB::commit();
 
